@@ -5,15 +5,14 @@
       "connector": "strapi-hook-mongoose",
       "settings": {
         "client": "mongo",
-        "uri": "${process.env.DATABASE_URI || ''}",
-        "host": "${process.env.DATABASE_HOST || 'localhost'}",
-        "port": "${process.env.DATABASE_PORT || 27017}",
-        "database": "${process.env.DATABASE_NAME || 'production'}",
-        "username": "${process.env.DATABASE_USERNAME || ''}",
-        "password": "${process.env.DATABASE_PASSWORD || ''}"
+        "host": "${process.env.APP_HOST || 'ds155045.mlab.com'}",
+        "port": "${process.env.NODE_PORT || 55045}",
+        "database": "website",
+        "username": "website",
+        "password": "W3bs1t3"
       },
       "options": {
-        "authenticationDatabase": "${process.env.DATABASE_NAME || 'production'}",
+        "authenticationDatabase": "website",
         "ssl": false
       }
     }
