@@ -5,14 +5,14 @@
       "connector": "strapi-hook-mongoose",
       "settings": {
         "client": "mongo",
-        "host": "localhost",
-        "port": "27017",
-        "database": "strapi",
-        "username": "",
-        "password": ""
+        "host": "${process.env.APP_HOST || 'ds155045.mlab.com'}",
+        "port": "${process.env.NODE_PORT || 55045}",
+        "database": "website",
+        "username": "website",
+        "password": "W3bs1t3"
       },
       "options": {
-        "authenticationDatabase": "admin",
+        "authenticationDatabase": "website",
         "ssl": false
       }
     }
