@@ -1,0 +1,48 @@
+{
+  "connection": "default",
+  "collectionName": "sectionitem",
+  "info": {
+    "name": "sectionitem",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "itemID": {
+      "default": "I",
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "data": {
+      "default": "",
+      "type": "text"
+    },
+    "dataFile": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "sectionType": {
+      "default": "",
+      "type": "string"
+    },
+    "sectiondetail": {
+      "model": "sectiondetail",
+      "via": "sectionitem"
+    },
+    "type": {
+      "default": "I",
+      "unique": true,
+      "type": "string",
+      "required": true
+    },
+    "fieldName": {
+      "default": "F",
+      "unique": true,
+      "type": "string"
+    }
+  }
+}

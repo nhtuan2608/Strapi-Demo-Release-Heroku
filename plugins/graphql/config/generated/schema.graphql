@@ -1,0 +1,964 @@
+input createMetadataInput {
+  data: MetadataInput
+}
+
+type createMetadataPayload {
+  metadatum: Metadata
+}
+
+input createPagesInput {
+  data: PagesInput
+}
+
+type createPagesPayload {
+  page: Pages
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input createSectiondetailInput {
+  data: SectiondetailInput
+}
+
+type createSectiondetailPayload {
+  sectiondetail: Sectiondetail
+}
+
+input createSectionitemInput {
+  data: SectionitemInput
+}
+
+type createSectionitemPayload {
+  sectionitem: Sectionitem
+}
+
+input createSectionsInput {
+  data: SectionsInput
+}
+
+type createSectionsPayload {
+  section: Sections
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""
+The `DateTime` scalar represents a date and time following the ISO 8601 standard
+"""
+scalar DateTime
+
+input deleteMetadataInput {
+  where: InputID
+}
+
+type deleteMetadataPayload {
+  metadatum: Metadata
+}
+
+input deletePagesInput {
+  where: InputID
+}
+
+type deletePagesPayload {
+  page: Pages
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteSectiondetailInput {
+  where: InputID
+}
+
+type deleteSectiondetailPayload {
+  sectiondetail: Sectiondetail
+}
+
+input deleteSectionitemInput {
+  where: InputID
+}
+
+type deleteSectionitemPayload {
+  sectionitem: Sectionitem
+}
+
+input deleteSectionsInput {
+  where: InputID
+}
+
+type deleteSectionsPayload {
+  section: Sections
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+input editFileInput {
+  name: String
+  hash: String
+  sha256: String
+  ext: String
+  mime: String
+  size: String
+  url: String
+  provider: String
+  public_id: String
+  related: [ID]
+}
+
+input editMetadataInput {
+  pageName: String
+  metaHTML: String
+  pages: [ID]
+}
+
+input editPagesInput {
+  title: String
+  url: String
+  fullUrl: String
+  metadata: [ID]
+  sections: [ID]
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+input editSectiondetailInput {
+  sectionType: String
+  sections: ID
+  sectionitem: [ID]
+  apiJsonText: String
+  JsonDetail: JSON
+}
+
+input editSectionitemInput {
+  itemID: String
+  data: String
+  dataFile: ID
+  sectionType: String
+  sectiondetail: ID
+  type: String
+  fieldName: String
+}
+
+input editSectionsInput {
+  sectionName: String
+  sectionLayout: String
+  pages: [ID]
+  sectiondetail: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+}
+
+input FileInput {
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  public_id: String
+  related: [ID]
+}
+
+input InputID {
+  id: ID!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Metadata {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  pageName: String
+  metaHTML: String
+  pages(sort: String, limit: Int, start: Int, where: JSON): [Pages]
+}
+
+type MetadataAggregator {
+  count: Int
+}
+
+type MetadataConnection {
+  values: [Metadata]
+  groupBy: MetadataGroupBy
+  aggregate: MetadataAggregator
+}
+
+type MetadataConnection_id {
+  key: ID
+  connection: MetadataConnection
+}
+
+type MetadataConnectionCreatedAt {
+  key: DateTime
+  connection: MetadataConnection
+}
+
+type MetadataConnectionMetaHTML {
+  key: String
+  connection: MetadataConnection
+}
+
+type MetadataConnectionPageName {
+  key: String
+  connection: MetadataConnection
+}
+
+type MetadataConnectionUpdatedAt {
+  key: DateTime
+  connection: MetadataConnection
+}
+
+type MetadataGroupBy {
+  _id: [MetadataConnection_id]
+  createdAt: [MetadataConnectionCreatedAt]
+  updatedAt: [MetadataConnectionUpdatedAt]
+  pageName: [MetadataConnectionPageName]
+  metaHTML: [MetadataConnectionMetaHTML]
+}
+
+input MetadataInput {
+  pageName: String
+  metaHTML: String
+  pages: [ID]
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Metadata | createMetadataPayload | updateMetadataPayload | deleteMetadataPayload | MetadataConnection | MetadataAggregator | MetadataGroupBy | MetadataConnection_id | MetadataConnectionCreatedAt | MetadataConnectionUpdatedAt | MetadataConnectionPageName | MetadataConnectionMetaHTML | Pages | createPagesPayload | updatePagesPayload | deletePagesPayload | PagesConnection | PagesAggregator | PagesGroupBy | PagesConnection_id | PagesConnectionCreatedAt | PagesConnectionUpdatedAt | PagesConnectionTitle | PagesConnectionUrl | PagesConnectionFullUrl | Sectiondetail | createSectiondetailPayload | updateSectiondetailPayload | deleteSectiondetailPayload | SectiondetailConnection | SectiondetailAggregator | SectiondetailGroupBy | SectiondetailConnection_id | SectiondetailConnectionCreatedAt | SectiondetailConnectionUpdatedAt | SectiondetailConnectionSectionType | SectiondetailConnectionSections | SectiondetailConnectionApiJsonText | SectiondetailConnectionJsonDetail | Sectionitem | createSectionitemPayload | updateSectionitemPayload | deleteSectionitemPayload | SectionitemConnection | SectionitemAggregator | SectionitemGroupBy | SectionitemConnection_id | SectionitemConnectionCreatedAt | SectionitemConnectionUpdatedAt | SectionitemConnectionItemID | SectionitemConnectionData | SectionitemConnectionDataFile | SectionitemConnectionSectionType | SectionitemConnectionSectiondetail | SectionitemConnectionType | SectionitemConnectionFieldName | Sections | createSectionsPayload | updateSectionsPayload | deleteSectionsPayload | SectionsConnection | SectionsAggregator | SectionsGroupBy | SectionsConnection_id | SectionsConnectionCreatedAt | SectionsConnectionUpdatedAt | SectionsConnectionSectionName | SectionsConnectionSectionLayout | SectionsConnectionSectiondetail | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+
+type Mutation {
+  createMetadata(input: createMetadataInput): createMetadataPayload
+  updateMetadata(input: updateMetadataInput): updateMetadataPayload
+  deleteMetadata(input: deleteMetadataInput): deleteMetadataPayload
+  createPages(input: createPagesInput): createPagesPayload
+  updatePages(input: updatePagesInput): updatePagesPayload
+  deletePages(input: deletePagesInput): deletePagesPayload
+  createSectiondetail(input: createSectiondetailInput): createSectiondetailPayload
+  updateSectiondetail(input: updateSectiondetailInput): updateSectiondetailPayload
+  deleteSectiondetail(input: deleteSectiondetailInput): deleteSectiondetailPayload
+  createSectionitem(input: createSectionitemInput): createSectionitemPayload
+  updateSectionitem(input: updateSectionitemInput): updateSectionitemPayload
+  deleteSectionitem(input: deleteSectionitemInput): deleteSectionitemPayload
+  createSections(input: createSectionsInput): createSectionsPayload
+  updateSections(input: updateSectionsInput): updateSectionsPayload
+  deleteSections(input: deleteSectionsInput): deleteSectionsPayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, source: String, file: Upload!): UploadFile!
+}
+
+type Pages {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  url: String
+  fullUrl: String
+  metadata(sort: String, limit: Int, start: Int, where: JSON): [Metadata]
+  sections(sort: String, limit: Int, start: Int, where: JSON): [Sections]
+}
+
+type PagesAggregator {
+  count: Int
+}
+
+type PagesConnection {
+  values: [Pages]
+  groupBy: PagesGroupBy
+  aggregate: PagesAggregator
+}
+
+type PagesConnection_id {
+  key: ID
+  connection: PagesConnection
+}
+
+type PagesConnectionCreatedAt {
+  key: DateTime
+  connection: PagesConnection
+}
+
+type PagesConnectionFullUrl {
+  key: String
+  connection: PagesConnection
+}
+
+type PagesConnectionTitle {
+  key: String
+  connection: PagesConnection
+}
+
+type PagesConnectionUpdatedAt {
+  key: DateTime
+  connection: PagesConnection
+}
+
+type PagesConnectionUrl {
+  key: String
+  connection: PagesConnection
+}
+
+type PagesGroupBy {
+  _id: [PagesConnection_id]
+  createdAt: [PagesConnectionCreatedAt]
+  updatedAt: [PagesConnectionUpdatedAt]
+  title: [PagesConnectionTitle]
+  url: [PagesConnectionUrl]
+  fullUrl: [PagesConnectionFullUrl]
+}
+
+input PagesInput {
+  title: String!
+  url: String
+  fullUrl: String
+  metadata: [ID]
+  sections: [ID]
+}
+
+type Query {
+  metadatum(id: ID!): Metadata
+  metadata(sort: String, limit: Int, start: Int, where: JSON): [Metadata]
+  metadataConnection(sort: String, limit: Int, start: Int, where: JSON): MetadataConnection
+  page(id: ID!): Pages
+  pages(sort: String, limit: Int, start: Int, where: JSON): [Pages]
+  pagesConnection(sort: String, limit: Int, start: Int, where: JSON): PagesConnection
+  sectiondetail(id: ID!): Sectiondetail
+  sectiondetails(sort: String, limit: Int, start: Int, where: JSON): [Sectiondetail]
+  sectiondetailsConnection(sort: String, limit: Int, start: Int, where: JSON): SectiondetailConnection
+  sectionitem(id: ID!): Sectionitem
+  sectionitems(sort: String, limit: Int, start: Int, where: JSON): [Sectionitem]
+  sectionitemsConnection(sort: String, limit: Int, start: Int, where: JSON): SectionitemConnection
+  section(id: ID!): Sections
+  sections(sort: String, limit: Int, start: Int, where: JSON): [Sections]
+  sectionsConnection(sort: String, limit: Int, start: Int, where: JSON): SectionsConnection
+  files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+type Sectiondetail {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  sectionType: String
+  sections: Sections
+  apiJsonText: String
+  JsonDetail: JSON
+  sectionitem(sort: String, limit: Int, start: Int, where: JSON): [Sectionitem]
+}
+
+type SectiondetailAggregator {
+  count: Int
+}
+
+type SectiondetailConnection {
+  values: [Sectiondetail]
+  groupBy: SectiondetailGroupBy
+  aggregate: SectiondetailAggregator
+}
+
+type SectiondetailConnection_id {
+  key: ID
+  connection: SectiondetailConnection
+}
+
+type SectiondetailConnectionApiJsonText {
+  key: String
+  connection: SectiondetailConnection
+}
+
+type SectiondetailConnectionCreatedAt {
+  key: DateTime
+  connection: SectiondetailConnection
+}
+
+type SectiondetailConnectionJsonDetail {
+  key: JSON
+  connection: SectiondetailConnection
+}
+
+type SectiondetailConnectionSections {
+  key: ID
+  connection: SectiondetailConnection
+}
+
+type SectiondetailConnectionSectionType {
+  key: String
+  connection: SectiondetailConnection
+}
+
+type SectiondetailConnectionUpdatedAt {
+  key: DateTime
+  connection: SectiondetailConnection
+}
+
+type SectiondetailGroupBy {
+  _id: [SectiondetailConnection_id]
+  createdAt: [SectiondetailConnectionCreatedAt]
+  updatedAt: [SectiondetailConnectionUpdatedAt]
+  sectionType: [SectiondetailConnectionSectionType]
+  sections: [SectiondetailConnectionSections]
+  apiJsonText: [SectiondetailConnectionApiJsonText]
+  JsonDetail: [SectiondetailConnectionJsonDetail]
+}
+
+input SectiondetailInput {
+  sectionType: String
+  sections: ID
+  sectionitem: [ID]
+  apiJsonText: String
+  JsonDetail: JSON
+}
+
+type Sectionitem {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  itemID: String!
+  data: String
+  dataFile: UploadFile
+  sectionType: String
+  sectiondetail: Sectiondetail
+  type: String!
+  fieldName: String
+}
+
+type SectionitemAggregator {
+  count: Int
+}
+
+type SectionitemConnection {
+  values: [Sectionitem]
+  groupBy: SectionitemGroupBy
+  aggregate: SectionitemAggregator
+}
+
+type SectionitemConnection_id {
+  key: ID
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionCreatedAt {
+  key: DateTime
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionData {
+  key: String
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionDataFile {
+  key: ID
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionFieldName {
+  key: String
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionItemID {
+  key: String
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionSectiondetail {
+  key: ID
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionSectionType {
+  key: String
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionType {
+  key: String
+  connection: SectionitemConnection
+}
+
+type SectionitemConnectionUpdatedAt {
+  key: DateTime
+  connection: SectionitemConnection
+}
+
+type SectionitemGroupBy {
+  _id: [SectionitemConnection_id]
+  createdAt: [SectionitemConnectionCreatedAt]
+  updatedAt: [SectionitemConnectionUpdatedAt]
+  itemID: [SectionitemConnectionItemID]
+  data: [SectionitemConnectionData]
+  dataFile: [SectionitemConnectionDataFile]
+  sectionType: [SectionitemConnectionSectionType]
+  sectiondetail: [SectionitemConnectionSectiondetail]
+  type: [SectionitemConnectionType]
+  fieldName: [SectionitemConnectionFieldName]
+}
+
+input SectionitemInput {
+  itemID: String!
+  data: String
+  dataFile: ID
+  sectionType: String
+  sectiondetail: ID
+  type: String!
+  fieldName: String
+}
+
+type Sections {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  sectionName: String!
+  sectionLayout: String
+  sectiondetail: Sectiondetail
+  pages(sort: String, limit: Int, start: Int, where: JSON): [Pages]
+}
+
+type SectionsAggregator {
+  count: Int
+}
+
+type SectionsConnection {
+  values: [Sections]
+  groupBy: SectionsGroupBy
+  aggregate: SectionsAggregator
+}
+
+type SectionsConnection_id {
+  key: ID
+  connection: SectionsConnection
+}
+
+type SectionsConnectionCreatedAt {
+  key: DateTime
+  connection: SectionsConnection
+}
+
+type SectionsConnectionSectiondetail {
+  key: ID
+  connection: SectionsConnection
+}
+
+type SectionsConnectionSectionLayout {
+  key: String
+  connection: SectionsConnection
+}
+
+type SectionsConnectionSectionName {
+  key: String
+  connection: SectionsConnection
+}
+
+type SectionsConnectionUpdatedAt {
+  key: DateTime
+  connection: SectionsConnection
+}
+
+type SectionsGroupBy {
+  _id: [SectionsConnection_id]
+  createdAt: [SectionsConnectionCreatedAt]
+  updatedAt: [SectionsConnectionUpdatedAt]
+  sectionName: [SectionsConnectionSectionName]
+  sectionLayout: [SectionsConnectionSectionLayout]
+  sectiondetail: [SectionsConnectionSectiondetail]
+}
+
+input SectionsInput {
+  sectionName: String!
+  sectionLayout: String
+  pages: [ID]
+  sectiondetail: ID
+}
+
+input updateMetadataInput {
+  where: InputID
+  data: editMetadataInput
+}
+
+type updateMetadataPayload {
+  metadatum: Metadata
+}
+
+input updatePagesInput {
+  where: InputID
+  data: editPagesInput
+}
+
+type updatePagesPayload {
+  page: Pages
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateSectiondetailInput {
+  where: InputID
+  data: editSectiondetailInput
+}
+
+type updateSectiondetailPayload {
+  sectiondetail: Sectiondetail
+}
+
+input updateSectionitemInput {
+  where: InputID
+  data: editSectionitemInput
+}
+
+type updateSectionitemPayload {
+  sectionitem: Sectionitem
+}
+
+input updateSectionsInput {
+  where: InputID
+  data: editSectionsInput
+}
+
+type updateSectionsPayload {
+  section: Sections
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadFile {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  public_id: String
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileAggregator {
+  count: Int
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileConnection_id {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPublic_id {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSha256 {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileGroupBy {
+  _id: [UploadFileConnection_id]
+  createdAt: [UploadFileConnectionCreatedAt]
+  updatedAt: [UploadFileConnectionUpdatedAt]
+  name: [UploadFileConnectionName]
+  hash: [UploadFileConnectionHash]
+  sha256: [UploadFileConnectionSha256]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  provider: [UploadFileConnectionProvider]
+  public_id: [UploadFileConnectionPublic_id]
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+}
+
+type UsersPermissionsMe {
+  _id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+type UsersPermissionsPermission {
+  _id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleConnection_id {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleGroupBy {
+  _id: [UsersPermissionsRoleConnection_id]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsUser {
+  _id: ID!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserConnection_id {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserGroupBy {
+  _id: [UsersPermissionsUserConnection_id]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}

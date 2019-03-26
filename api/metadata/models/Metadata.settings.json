@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "metadata",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "pageName": {
+      "default": "",
+      "type": "string"
+    },
+    "metaHTML": {
+      "default": "",
+      "type": "text"
+    },
+    "pages": {
+      "collection": "pages",
+      "via": "metadata"
+    }
+  }
+}
